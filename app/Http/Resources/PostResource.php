@@ -19,6 +19,7 @@ class PostResource extends JsonResource
             'user_id' => $this->user_id,
             'updated_at' => $this->updated_at,
             'image' => $this->image,
+            'comments' => CommentResource::collection($this->whenLoaded('comments')->to),
             'created_at' => $this->created_at->format('Y.m.d'),
         ];
     }

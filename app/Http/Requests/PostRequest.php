@@ -10,9 +10,7 @@ class PostRequest extends FormRequest
     {
         return [
             'text' => ['required', 'string', 'min:3'],
-
             'title' => ['nullable', 'string', 'max:255'],
-
             'image' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
 
         ];

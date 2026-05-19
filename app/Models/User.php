@@ -33,13 +33,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function Posts(): HasMany
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
 
-    public function Stories(): HasMany
+    public function stories(): HasMany
     {
         return $this->hasMany(Story::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }

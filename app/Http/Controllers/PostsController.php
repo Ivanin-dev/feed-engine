@@ -20,6 +20,9 @@ class PostsController extends Controller
 
     public function view(Post $post): Response
     {
+
+        $post->load(['user', 'comments.user']);
+
         return Inertia::render('Posts/Show', [
             'post' => new PostResource($post)->resolve(),
         ]);
