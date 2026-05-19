@@ -22,8 +22,6 @@ export function PostList({ posts }: PostListProps) {
         return <div>No posts yet...</div>;
     }
 
-    console.log(postPages);
-
     return (
         <div className="mt-8 justify-items-center space-y-8 overflow-auto shadow-xl">
             {postList.map((post) => (
