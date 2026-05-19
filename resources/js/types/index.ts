@@ -3,6 +3,10 @@ export type * from './auth';
 export type * from './navigation';
 export type * from './ui';
 
+
+export interface ResourceCollection<T>{
+    data: T[];
+}
 export interface PaginatedResponse<T> {
     data: T[];
     meta: {
@@ -24,7 +28,17 @@ export interface Post {
     image?: string;
     user_id: number;
     user?: User;
+    comments?: ResourceCollection<Comment>;
     slug: string;
+    created_at?: string;
+    updated_at?: string;
+}
+
+export interface Comment {
+    id: number;
+    text: string;
+    user_id: number;
+    user?: User;
     created_at?: string;
     updated_at?: string;
 }
