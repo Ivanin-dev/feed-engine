@@ -3,7 +3,11 @@ import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
 import AppLogo from 'resources/js/components/laravel/app-logo';
 import AppLogoIcon from 'resources/js/components/laravel/app-logo-icon';
 import { Breadcrumbs } from 'resources/js/components/laravel/breadcrumbs';
-import { Avatar, AvatarFallback, AvatarImage } from 'resources/js/components/ui/avatar';
+import {
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
+} from 'resources/js/components/ui/avatar';
 import { Button } from 'resources/js/components/ui/button';
 import {
     DropdownMenu,
@@ -32,7 +36,7 @@ import { UserMenuContent } from 'resources/js/components/laravel/user-menu-conte
 import { useCurrentUrl } from 'resources/js/hooks/use-current-url';
 import { useInitials } from 'resources/js/hooks/use-initials';
 import { cn, toUrl } from 'resources/js/lib/utils';
-import { dashboard } from 'resources/js/routes';
+import { posts } from 'resources/js/routes';
 import type { BreadcrumbItem, NavItem } from 'resources/js/types';
 
 type Props = {
@@ -41,8 +45,8 @@ type Props = {
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
-        href: dashboard(),
+        title: 'Home',
+        href: posts(),
         icon: LayoutGrid,
     },
 ];
@@ -135,7 +139,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                     </div>
 
                     <Link
-                        href={dashboard()}
+                        href={posts()}
                         prefetch
                         className="flex items-center space-x-2"
                     >

@@ -122,7 +122,7 @@ export default function MyProfile({
     );
 }
 
-Profile.layout = {
+MyProfile.layout = {
     breadcrumbs: [
         {
             title: 'Profile settings',
