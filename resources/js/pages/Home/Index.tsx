@@ -1,10 +1,18 @@
+import { PostList } from '@/components/posts/PostList';
+import { SearchInput } from '@/components/ui/search-input';
+import { useSearchFilters } from '@/hooks/useSearchFilters';
 import type { PaginatedResponse, Post } from '@/types';
-import HomeFeed from '../../components/home/HomeFeed';
-interface ListProps{
-    posts: PaginatedResponse<Post>
+interface ListProps {
+    posts: PaginatedResponse<Post>;
+    filters: { search?: string };
 }
-export default function Index({posts}: ListProps){
-    return(
-                <HomeFeed posts={posts}/>
-        );
+export default function Index({ posts, filters }: ListProps) {
+    const { search, setSearch } = useSearchFilters(filters.search ?? '', '/');
+
+    return (
+        <>
+            <SearchInput name="search" onChange={setSearch} value={search} />
+            <PostList posts={posts} />
+        </>
+    );
 }
