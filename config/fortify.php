@@ -73,6 +73,11 @@ return [
     |
     */
 
+    'redirects' => [
+        '/password-reset' => '/auth/login'
+    ],
+
+
     'home' => '/',
 
     /*
