@@ -1,7 +1,13 @@
 import { Link, usePage } from '@inertiajs/react';
+import { Menu } from 'lucide-react';
 import { useState } from 'react';
 
-export function AppHeader() {
+interface SidebarToggle {
+    isSidebarOpen?: boolean;
+    onSidebarToggle?: () => void;
+}
+
+export function AppHeader({ isSidebarOpen, onSidebarToggle }: SidebarToggle) {
     const [menus, setMenus] = useState({
         posts: false,
         create: false,
@@ -21,6 +27,18 @@ export function AppHeader() {
     return (
         <header className="sticky top-0 z-50 h-13 w-full shrink-0 border-b border-zinc-800 bg-[#0D0D0D]">
             <div className="flex h-full items-stretch justify-between">
+                {onSidebarToggle && (
+                    <button
+                        type="button"
+                        aria-label={
+                            isSidebarOpen ? 'Close sidebar' : 'Open sidebar'
+                        }
+                        onClick={onSidebarToggle}
+                        className="flex h-full items-center px-4 md:hidden"
+                    >
+                        <Menu className="size-6" />
+                    </button>
+                )}
                 <div className="h-full space-x-6 pt-3 pl-4">
                     <Link className="text-[18px]" href="/">
                         Home
@@ -48,10 +66,6 @@ export function AppHeader() {
                             Login
                         </Link>
                     )}
-                    <input
-                        placeholder="find more..."
-                        className="w-64 border-l border-zinc-800 bg-[#202020] px-6 text-white transition-all outline-none focus:bg-[#252525]"
-                    />
                 </div>
             </div>
             {menus.profile && (
