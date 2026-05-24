@@ -83,31 +83,17 @@ export default function Register() {
                         {errors.password_confirmation}
                     </span>
                 )}
-                <div className="flex w-80 items-center justify-between text-sm">
-                    <Link
-                        href="/forgot-password"
-                        className="text-zinc-400 hover:text-white"
-                    >
-                        Forgot password?
-                    </Link>
-                </div>
-
                 <Button
                     type="submit"
                     disabled={processing}
-                    className="h-10 w-80 rounded-xl bg-[#3137C9] font-medium text-white transition hover:bg-[#3f46df] disabled:cursor-not-allowed disabled:opacity-60"
+                    className="h-10 w-30 rounded-xl bg-[#3137C9]"
                 >
-                    Login
+                    Register
                 </Button>
-
-                <div className="text-sm text-zinc-400">
-                     Have an account?
-                    <Link
-                        href="/auth/login"
-                        className="text-white hover:underline"
-                    >
-                        Login
-                    </Link>
+                <div className="flex gap-10 pl-10">
+                    <Link href="/auth/login">Login</Link>
+                    {/*TODO end password forgot*/}
+                    <Link href="#">forgot password</Link>
                 </div>
             </div>
         </form>

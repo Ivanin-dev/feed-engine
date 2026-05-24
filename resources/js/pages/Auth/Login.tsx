@@ -5,14 +5,12 @@ import type { FormEvent } from 'react';
 export interface LoginValues {
     email: string;
     password: string;
-    remember: boolean
 }
 
 export default function Login() {
     const { data, setData, post, processing, errors } = useForm<LoginValues>({
         email: '',
         password: '',
-        remember: false,
     });
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -49,43 +47,16 @@ export default function Login() {
                 {errors.password && (
                     <span className="text-red-700">{errors.password}</span>
                 )}
-                <div className="flex w-80 items-center justify-between text-sm">
-                    <label className="flex items-center gap-2 text-zinc-300">
-                        <input
-                            type="checkbox"
-                            checked={data.remember}
-                            onChange={(e) =>
-                                setData('remember', e.target.checked)
-                            }
-                            className="h-4 w-4 rounded border-zinc-700 bg-transparent accent-[#3137C9]"
-                        />
-                        Remember me
-                    </label>
-
-                    <Link
-                        href="/forgot-password"
-                        className="text-zinc-400 hover:text-white"
-                    >
-                        Forgot password?
-                    </Link>
-                </div>
-
                 <Button
                     type="submit"
                     disabled={processing}
-                    className="h-10 w-80 rounded-xl bg-[#3137C9] font-medium text-white transition hover:bg-[#3f46df] disabled:cursor-not-allowed disabled:opacity-60"
+                    className="h-10 w-30 rounded-xl bg-[#3137C9]"
                 >
                     Login
                 </Button>
-
-                <div className="text-sm text-zinc-400">
-                    Dont have an account?
-                    <Link
-                        href="/auth/register"
-                        className="text-white hover:underline"
-                    >
-                        Register
-                    </Link>
+                <div className="flex gap-10 pl-10">
+                    <Link href="/auth/register">Register</Link>
+                    <Link href="#">forgot password</Link>
                 </div>
             </div>
         </form>
