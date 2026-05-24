@@ -13,7 +13,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate(['password' => 'required', 'email' => 'required|email']);
+        $credentials = $request->validate(['password' => 'required', 'email' => 'required|email' ]);
         $remember = $request->boolean('remember');
 
         if (! Auth::attempt($credentials, $remember)) {

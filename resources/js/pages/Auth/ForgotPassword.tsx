@@ -40,7 +40,7 @@ export default function ForgotPassword() {
                     </span>
                 )}
                 {wasSuccessful && (
-                    <span >
+                    <span>
                         Message was sent to your email
                     </span>
                 )}

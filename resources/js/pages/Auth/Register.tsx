@@ -109,6 +109,7 @@ export default function Register() {
                         Login
                     </Link>
                 </div>
+
             </div>
         </form>
     );

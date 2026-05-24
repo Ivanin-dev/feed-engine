@@ -73,7 +73,8 @@ export default function ResetPassword({ email, token }: ResetPasswordProps) {
                     className="mx-auto h-10 rounded-xl bg-[#3137C9] px-4"
                 >
                     Confirm password reset
-                </Button>
+
+                 </Button>
             </div>
             <div className="pt-10 pl-2">
                 <Link href="/login">Back to login</Link>
