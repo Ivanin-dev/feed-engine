@@ -9,11 +9,19 @@ interface SidebarToggle {
 
 export function AppHeader({ isSidebarOpen, onSidebarToggle }: SidebarToggle) {
     const [menus, setMenus] = useState({
-        posts: false,
-        create: false,
         profile: false,
+        edit: false,
+        logout: false,
     });
     const { auth } = usePage().props;
+
+    const closeMenus = () => {
+        setMenus({
+            profile: false,
+            edit: false,
+            logout: false,
+        });
+    };
 
     const toggle = (menu: keyof typeof menus) =>
         setMenus((prev) => ({
@@ -66,17 +74,17 @@ export function AppHeader({ isSidebarOpen, onSidebarToggle }: SidebarToggle) {
                             Login
                         </Link>
                     )}
-                    <input
-                        placeholder="find more..."
-                        className="w-64 border-l border-zinc-800 bg-[#202020] px-6 text-white transition-all outline-none focus:bg-[#252525]"
-                    />
                 </div>
             </div>
             {menus.profile && (
-                <div className="absolute top-full right-64 z-50 grid w-20 justify-start gap-2 space-y-2 rounded-b-md border border-zinc-800 bg-[#151515] px-3 py-2 shadow-xl">
-                    <Link href="/profile">Profile</Link>
-                    <Link href="/profile/edit">Edit</Link>
-                    <Link method="post" href="/logout">
+                <div className="absolute top-full right-0 z-50 grid w-20 justify-start gap-2 space-y-2 rounded-b-md border border-zinc-800 bg-[#151515] px-3 py-2 shadow-xl">
+                    <Link onClick={closeMenus} href="/profile">
+                        Profile
+                    </Link>
+                    <Link onClick={closeMenus} href="/profile/edit">
+                        Edit
+                    </Link>
+                    <Link onClick={closeMenus} method="post" href="/logout">
                         logout
                     </Link>
                 </div>
