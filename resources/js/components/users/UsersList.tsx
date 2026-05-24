@@ -11,11 +11,9 @@ interface UsersProps {
 export default function UsersList({ users }: UsersProps) {
     const pages = users.meta;
 
-
     const usersList = users.data;
 
-    console.log('page', pages);
-    const handlePageChange = createPageNavigator('/', true);
+    const handlePageChange = createPageNavigator('/users', true);
 
     return (
         <section>

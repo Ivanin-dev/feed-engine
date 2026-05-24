@@ -27,12 +27,12 @@ export function PostList({ posts }: PostListProps) {
             {postList.map((post) => (
                 <Card
                     key={post.id}
-                    className="relative w-200 overflow-auto bg-[#202020] p-0"
+                    className="relative w-80 overflow-auto bg-[#202020] p-0 md:w-100 lg:w-200"
                 >
                     {post.image && (
                         <img
                             src={`/storage/${post.image}`}
-                            className="h-75 w-full rounded-lg border border-zinc-800 object-cover"
+                            className="h-40 w-full rounded-lg border border-zinc-800 object-cover sm:w-30 md:w-100 lg:h-75 lg:w-200"
                             alt="Post content"
                         />
                     )}
