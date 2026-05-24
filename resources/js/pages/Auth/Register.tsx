@@ -92,6 +92,7 @@ export default function Register() {
                 </Button>
                 <div className="flex gap-10 pl-10">
                     <Link href="/auth/login">Login</Link>
+                    {/*TODO end password forgot*/}
                     <Link href="#">forgot password</Link>
                 </div>
             </div>
