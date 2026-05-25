@@ -45,11 +45,12 @@ export interface Comment {
 
 export interface Story {
     id: number;
-    title: string;
-    image: string;
+    caption: string;
+    media_type: string;
+    media_path: string;
+    preview_path:string;
     user_id: number;
     user?: User;
-    type: string;
     is_active: boolean;
     created_at: string;
     expires_at: string;

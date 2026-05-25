@@ -25,7 +25,7 @@ class ProfileController extends Controller
             Story::where('user_id', '=', $request->user()->id)
                 ->isActive()
                 ->latest()
-                ->paginate(PaginationEnum::PAGE_SIZE->value)
+                ->cursorPaginate(PaginationEnum::PAGE_SIZE->value)
         );
 
         return Inertia::render('Profile/MyProfile', [
@@ -68,12 +68,12 @@ class ProfileController extends Controller
             ]
         );
 
-        $updateData = collect($credentials)->filter(fn($value, $key) => !in_array($key, ['avatar', 'banner', 'password']) || $request->hasFile($key)
+        $updateData = collect($credentials)->filter(fn ($value, $key) => ! in_array($key, ['avatar', 'banner', 'password']) || $request->hasFile($key)
             || $request->filled($key));
 
         foreach (['avatar', 'banner'] as $field) {
             if ($request->hasFile($field)) {
-                $updateData[$field] = $request->file($field)->store($field . 's', 'public');
+                $updateData[$field] = $request->file($field)->store($field.'s', 'public');
             }
         }
 

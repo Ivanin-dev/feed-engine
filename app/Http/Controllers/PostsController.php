@@ -14,19 +14,7 @@ class PostsController extends Controller
 {
     public function index(Request $request)
     {
-        $posts = Post::query()
-            ->latest()
-            ->when($request->input('search'), function ($query, $search) {
-                $query->where('title', 'like', "%{$search}%");
-            })
-            ->paginate(PaginationEnum::PAGE_SIZE->value)
-            ->withQueryString();
 
-        return Inertia::render('Home/Index',
-            [
-                'posts' => PostResource::collection($posts),
-                'filters' => $request->only(['search']),
-            ]);
     }
 
     public function view(Post $post): Response

@@ -11,10 +11,11 @@ class Story extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'image',
+        'caption',
+        'media_type',
+        'media_path',
+        'preview_path',
         'user_id',
-        'type',
         'expires_at',
         'created_at',
         'is_active',

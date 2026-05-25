@@ -29,7 +29,7 @@ export default function EditProfile() {
             password_confirmation: '',
         });
     const [previewUrl, setPreviewUrl] = useState({
-        avatar: null as string | null,
+            avatar: null as string | null,
         banner: null as string | null,
     });
 

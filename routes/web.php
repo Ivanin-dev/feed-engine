@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StoriesController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::prefix('posts')->group(function () {
         Route::post('/post', [PostsController::class, 'store'])->name('post.store');
         Route::post('/post/{post}', [CommentController::class, 'store'])->name('comment.store');
+    });
+    Route::prefix('stories')->group(function () {
+        Route::post('/post', [StoriesController::class, 'store'])->name('story.store');
     });
     Route::inertia('/profile/edit', 'Profile/EditProfile')->name('edit');
     Route::post('/update', [ProfileController::class, 'update'])->name('user.update');

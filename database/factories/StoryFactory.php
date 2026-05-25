@@ -14,9 +14,9 @@ class StoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->word(),
-            'image' => 'https://loremflickr.com/400/600?random='.$this->faker->unique()->numberBetween(1, 1000),
-            'type' => $this->faker->word(),
+            'caption' => $this->faker->word(),
+            'media_path' => 'https://loremflickr.com/400/600?random='.$this->faker->unique()->numberBetween(1, 1000),
+            'media_type' => 'image',
             'expires_at' => Carbon::now()->addDay(),
             'created_at' => Carbon::now(),
 

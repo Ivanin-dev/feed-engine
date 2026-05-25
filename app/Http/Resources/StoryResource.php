@@ -13,9 +13,14 @@ class StoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'image' => $this->image,
-            'type' => $this->type,
+            'caption' => $this->caption,
+            'media_type' => $this->media_type,
+            'media_path' => $this->media_path,
+            'preview_path' => $this->preview_path,
+            'user_id' => $this->user_id,
+            'expires_at' => $this->expires_at,
+            'is_active' => $this->is_active,
+            'updated_at' => $this->updated_at,
             'created_at' => $this->created_at->format('d.m.Y'),
 
         ];

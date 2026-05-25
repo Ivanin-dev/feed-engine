@@ -1,6 +1,6 @@
 import { Button, Input } from '@headlessui/react';
 import { Link, useForm } from '@inertiajs/react';
-import { FormEvent, useEffect, useRef } from 'react';
+import type { FormEvent } from 'react';
 
 export interface ResetPasswordProps {
     email: string;

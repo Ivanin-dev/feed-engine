@@ -10,11 +10,12 @@ return new class extends Migration {
     {
         Schema::create('stories', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('image');
+            $table->string('caption');
+            $table->string('media_type');
+            $table->string('media_path');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->string('type');
             $table->timestamp('expires_at');
+            $table->string('preview_path');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

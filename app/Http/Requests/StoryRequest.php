@@ -9,12 +9,8 @@ class StoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required'],
-            'image' => ['required'],
-            'user_id' => ['required', 'exists:users'],
-            'type' => ['required'],
-            'created_at' => ['required', 'date'],
-            'expires_at' => ['required', 'date'],
+            'caption' => ['required'],
+            'media' => ['required', 'file', 'mimetypes:image/jpeg,image/png,image/webp,video/mp4,video/webm'],
         ];
     }
 
