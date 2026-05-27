@@ -1,13 +1,13 @@
 import { Form, Head, Link, usePage } from '@inertiajs/react';
 import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
-import DeleteUser from '../../components/laravel/delete-user';
-import Heading from '../../components/laravel/heading';
-import InputError from '../../components/laravel/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { edit } from '@/routes/profile';
 import { send } from '@/routes/verification';
+import DeleteUser from '../../components/laravel/delete-user';
+import Heading from '../../components/laravel/heading';
+import InputError from '../../components/laravel/input-error';
 
 export default function MyProfile({
     mustVerifyEmail,

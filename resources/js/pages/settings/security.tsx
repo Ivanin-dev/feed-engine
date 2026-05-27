@@ -2,16 +2,16 @@ import { Form, Head } from '@inertiajs/react';
 import { ShieldCheck } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import SecurityController from '@/actions/App/Http/Controllers/Settings/SecurityController';
-import Heading from '../../components/laravel/heading';
-import InputError from '../../components/laravel/input-error';
-import PasswordInput from '../../components/laravel/password-input';
-import TwoFactorRecoveryCodes from '../../components/laravel/two-factor-recovery-codes';
-import TwoFactorSetupModal from '../../components/laravel/two-factor-setup-modal';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { useTwoFactorAuth } from '@/hooks/use-two-factor-auth';
 import { edit } from '@/routes/security';
 import { disable, enable } from '@/routes/two-factor';
+import Heading from '../../components/laravel/heading';
+import InputError from '../../components/laravel/input-error';
+import PasswordInput from '../../components/laravel/password-input';
+import TwoFactorRecoveryCodes from '../../components/laravel/two-factor-recovery-codes';
+import TwoFactorSetupModal from '../../components/laravel/two-factor-setup-modal';
 
 type Props = {
     canManageTwoFactor?: boolean;

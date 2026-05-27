@@ -1,5 +1,7 @@
 import { usePage } from '@inertiajs/react';
 import { ChevronsUpDown } from 'lucide-react';
+import { UserInfo } from 'resources/js/components/laravel/user-info';
+import { UserMenuContent } from 'resources/js/components/laravel/user-menu-content';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -11,8 +13,6 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from 'resources/js/components/ui/sidebar';
-import { UserInfo } from 'resources/js/components/laravel/user-info';
-import { UserMenuContent } from 'resources/js/components/laravel/user-menu-content';
 import { useIsMobile } from 'resources/js/hooks/use-mobile';
 
 export function NavUser() {

@@ -1,12 +1,12 @@
 import { Link, router } from '@inertiajs/react';
 import { LogOut, Settings } from 'lucide-react';
+import { UserInfo } from 'resources/js/components/laravel/user-info';
 import {
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
 } from 'resources/js/components/ui/dropdown-menu';
-import { UserInfo } from 'resources/js/components/laravel/user-info';
 import { useMobileNavigation } from 'resources/js/hooks/use-mobile-navigation';
 import { logout } from 'resources/js/routes';
 import { edit } from 'resources/js/routes/profile';

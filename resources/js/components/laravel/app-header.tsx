@@ -3,6 +3,7 @@ import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
 import AppLogo from 'resources/js/components/laravel/app-logo';
 import AppLogoIcon from 'resources/js/components/laravel/app-logo-icon';
 import { Breadcrumbs } from 'resources/js/components/laravel/breadcrumbs';
+import { UserMenuContent } from 'resources/js/components/laravel/user-menu-content';
 import {
     Avatar,
     AvatarFallback,
@@ -32,7 +33,6 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from 'resources/js/components/ui/tooltip';
-import { UserMenuContent } from 'resources/js/components/laravel/user-menu-content';
 import { useCurrentUrl } from 'resources/js/hooks/use-current-url';
 import { useInitials } from 'resources/js/hooks/use-initials';
 import { cn, toUrl } from 'resources/js/lib/utils';

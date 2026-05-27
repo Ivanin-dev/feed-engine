@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { Card } from 'resources/js/components/ui/card';
 import type { Story } from 'resources/js/types';
-import { Dialog, DialogTrigger } from '@radix-ui/react-dialog';
+import ViewStoryModal from '@/components/modals/ViewStoryModal';
 
 interface StoriesListProp {
     stories: {
@@ -47,9 +48,11 @@ export default function Stories({ stories, action }: StoriesListProp) {
                                 </div>
                             </Card>
                         </DialogTrigger>
+                    <ViewStoryModal story={story}/>
                     </Dialog>
                 ))}
             </div>
+
         </section>
     );
 }

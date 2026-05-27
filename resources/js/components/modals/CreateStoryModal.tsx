@@ -1,5 +1,7 @@
 import { useForm } from '@inertiajs/react';
-import type { SyntheticEvent} from 'react';
+import { PlusCircle } from 'lucide-react';
+import type { SyntheticEvent } from 'react';
+import React from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -18,6 +20,7 @@ interface StoryProps {
 
 export default function CreateStoryModal() {
     const closeRef = useRef<HTMLButtonElement>(null);
+    const fileRef = useRef<HTMLInputElement>(null);
 
     const { setData, post, reset } = useForm<StoryProps>({
         caption: '',
@@ -25,6 +28,7 @@ export default function CreateStoryModal() {
     });
     const [previewUrl, setPreviewUrl] = useState({
         media: null as string | null,
+        mediaType: null as 'image' | 'video' | null,
     });
 
     const handleSubmit = (e: SyntheticEvent) => {
@@ -32,10 +36,31 @@ export default function CreateStoryModal() {
         post(window.route('story.store'), {
             forceFormData: true,
             onSuccess: () => {
-                reset('caption', 'media');
+                reset('caption', 'media')
                 closeRef.current?.click();
             },
         });
+    };
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+
+        if (!file) {
+            return;
+        }
+
+        if (previewUrl.media) {
+            URL.revokeObjectURL(previewUrl.media);
+        }
+
+        const url = URL.createObjectURL(file);
+        const isVideo = file.type.startsWith('video');
+
+        setPreviewUrl((prev) => ({
+            ...prev,
+            media: url,
+            mediaType: isVideo ? 'video' : 'image',
+        }));
+        setData('media', file);
     };
 
     return (
@@ -46,25 +71,33 @@ export default function CreateStoryModal() {
 
             <div className="space-y-4 px-6 py-5">
                 <input
+                    ref={fileRef}
                     type="file"
-                    onChange={(e) => {
-                        const file = e.target.files?.[0];
-
-                        if (!file) {
-                            return;
-                        }
-
-                        if (previewUrl.media) {
-                            URL.revokeObjectURL(previewUrl.media);
-                        }
-
-                        const url = URL.createObjectURL(file);
-
-                        setPreviewUrl((prev) => ({ ...prev, media: url }));
-                        setData('media', file);
-                    }}
+                    className="hidden"
+                    onChange={handleFileChange}
+                    accept="image/*,video/*"
                 />
-                <img src={`${previewUrl.media}`} alt="" className="max-h-80"/>
+
+                <PlusCircle
+                    onClick={() => {
+                        fileRef.current?.click();
+                    }}
+                    className="hover:cursor-pointer"
+                ></PlusCircle>
+                {previewUrl.mediaType === 'image' && (
+                    <img
+                        src={`${previewUrl.media}`}
+                        alt=""
+                        className="max-h-80"
+                    />
+                )}
+                {previewUrl.mediaType === 'video' && (
+                    <video
+                        autoPlay={true}
+                        src={`${previewUrl.media}`}
+                        className="max-h-80"
+                    />
+                )}
                 <textarea
                     placeholder="Story caption"
                     onChange={(e) => setData('caption', e.target.value)}

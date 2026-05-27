@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class PostFactory extends Factory
 {
@@ -13,10 +14,17 @@ class PostFactory extends Factory
 
     public function definition(): array
     {
+        $files = glob(database_path('seeders/images/posts/*.jpg'));
+        $source = $files[array_rand($files)];
+
+        $filename = uniqid().'.jpg';
+
+        Storage::disk('public')->put('posts/'.$filename, file_get_contents($source));
+
         return [
             'title' => $this->faker->word(),
             'text' => $this->faker->text(),
-            'image' =>'https://loremflickr.com/400/600?random='.$this->faker->unique()->numberBetween(1, 1000),
+            'image' => 'posts/'.$filename,
             'slug' => $this->faker->slug(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

@@ -17,13 +17,17 @@ interface SidebarProps {
 export function AppSidebar({ isOpen, onClose }: SidebarProps) {
     const { user, auth } = usePage<PageProps>().props;
 
-    const displayUser = user ?? auth.user;
+    const displayUser = user ?? auth?.user;
 
-    const avatarSrc = displayUser?.avatar
+    if(!displayUser) {
+        return null;
+    }
+
+    const avatarSrc = displayUser.avatar
         ? `/storage/${displayUser.avatar}`
         : fallbackImg;
 
-    const bannerSrc = displayUser?.banner
+    const bannerSrc = displayUser.banner
         ? `/storage/${displayUser.banner}`
         : fallbackImg;
 

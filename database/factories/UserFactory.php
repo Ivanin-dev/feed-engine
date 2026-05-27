@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
@@ -24,13 +25,25 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $avatar = glob(database_path('seeders/images/avatars/*.jpg'));
+        $avatarSource = $avatar[array_rand($avatar)];
+
+        $banner = glob(database_path('seeders/images/banners/*.jpg'));
+        $bannerSource = $banner[array_rand($banner)];
+
+        $avatarName = uniqid().'.jpg';
+        $bannerName = uniqid().'.jpg';
+
+        Storage::disk('public')->put('avatars/'.$avatarName, file_get_contents($avatarSource));
+        Storage::disk('public')->put('banners/'.$bannerName, file_get_contents($bannerSource));
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'avatar' => 'avatars/test-avatar.png',
-            'banner' => 'banners/test-banner.png',
+            'avatar' => 'avatars/'.$avatarName,
+            'banner' => 'banners/'.$bannerName,
             'headline' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
             'remember_token' => Str::random(10),

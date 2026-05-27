@@ -1,7 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
-import AppLogoIcon from '../../components/laravel/app-logo-icon';
 import { posts } from '@/routes';
 import type { AuthLayoutProps } from '@/types';
+import AppLogoIcon from '../../components/laravel/app-logo-icon';
 
 export default function AuthSplitLayout({
     children,

@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react';
+import { edit as editAppearance } from '@/routes/appearance';
 import AppearanceTabs from '../../components/laravel/appearance-tabs';
 import Heading from '../../components/laravel/heading';
-import { edit as editAppearance } from '@/routes/appearance';
 
 export default function Appearance() {
     return (
