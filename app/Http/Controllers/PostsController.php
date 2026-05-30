@@ -18,11 +18,12 @@ class PostsController extends Controller
     public function index(Request $request)
     {
         $posts = Post::query()
-            ->latest()
             ->when($request->input('search'), function ($query, $search) {
                 $query->where('title', 'like', "%{$search}%");
             })
-            ->paginate(PaginationEnum::PAGE_SIZE->value)
+            ->orderBy('created_at', 'desc')
+            ->orderBy('id', 'desc')
+            ->cursorPaginate(PaginationEnum::PAGE_SIZE->value)
             ->withQueryString();
 
         return Inertia::render('Home/Index',
@@ -45,14 +46,14 @@ class PostsController extends Controller
     public function store(PostRequest $request)
     {
         $createData = collect($request->validated())
-            ->filter(fn ($val, $key) => $key !== 'image' || $request->hasFile($key));
+            ->filter(fn($val, $key) => $key !== 'image' || $request->hasFile($key));
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = uniqid().'.webp';
+            $filename = uniqid() . '.webp';
             $storagePath = storage_path('app/public/posts');
 
-            if (! is_dir($storagePath)) {
+            if (!is_dir($storagePath)) {
                 mkdir($storagePath, 0755, true);
             }
 
@@ -64,8 +65,8 @@ class PostsController extends Controller
 
             $encoded = $image->encodeUsingFormat(Format::WEBP, quality: 65);
 
-            $encoded->save($storagePath.'/'.$filename);
-            $createData['image'] = 'posts/'.$filename;
+            $encoded->save($storagePath . '/' . $filename);
+            $createData['image'] = 'posts/' . $filename;
         }
         $request->user()->posts()->create($createData->toArray());
 

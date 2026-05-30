@@ -7,12 +7,12 @@ interface ListProps {
     filters: { search?: string };
 }
 export default function Index({ posts, filters }: ListProps) {
-    const { search, setSearch } = useSearchFilters(filters.search ?? '', '/');
+    const { search, setSearch } = useSearchFilters(filters.search, posts.meta.current_page ,'/');
 
     return (
         <>
             <SearchInput name="search" onChange={setSearch} value={search} />
-            <PostList posts={posts} />
+            <PostList key={search} posts={posts} search={search} />
         </>
     );
 }

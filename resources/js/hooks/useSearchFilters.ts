@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 export function useSearchFilters(
     initialSearch: string | null = '',
+    page: number,
     path: string,
 ) {
     const [search, setSearch] = useState(initialSearch ?? '');
@@ -11,7 +12,7 @@ export function useSearchFilters(
         const delayDebounce = setTimeout(() => {
             router.get(
                 path,
-                { search },
+                { search, page },
                 {
                     preserveScroll: false,
                     preserveState: true,

@@ -10,7 +10,8 @@ interface UserProps {
 
 export default function Index({ users, filters }: UserProps) {
     const { search, setSearch } = useSearchFilters(
-        filters?.search ?? '',
+        filters?.search,
+        users.meta.current_page,
         '/users',
     );
 
