@@ -28,11 +28,22 @@ export default function EditProfile() {
             password: '',
             password_confirmation: '',
         });
+
     const [previewUrl, setPreviewUrl] = useState({
-            avatar: null as string | null,
+        avatar: null as string | null,
         banner: null as string | null,
     });
 
+    const changedData = {
+        name: data.name,
+        email: data.email,
+        headline: data.headline,
+        description: data.description,
+        password: data.password || undefined,
+        password_confirmation: data.password_confirmation || undefined,
+        ...(data.avatar && { avatar: data.avatar }),
+        ...(data.banner && { banner: data.banner }),
+    };
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -42,15 +53,22 @@ export default function EditProfile() {
             return;
         }
 
-        post(window.route('user.update'), {
-            preserveScroll: true,
-        });
+        post(window.route('user.update', changedData), { preserveScroll: true });
+    };
+
+    const handleReset = (name: 'avatar' | 'banner') => {
+        if (previewUrl[name]) {
+            URL.revokeObjectURL(previewUrl[name]);
+        }
+
+        setData(name, null);
+        setPreviewUrl((prev) => ({ ...prev, [name]: null }));
     };
 
     return (
         <form
             onSubmit={handleSubmit}
-            className="min-h-screen w-full px-20 py-10"
+            className="min-h-screen w-full justify-items-center py-10"
         >
             <h1 className="mb-10 text-2xl">My Profile</h1>
 
@@ -101,6 +119,7 @@ export default function EditProfile() {
 
                 <div>
                     <label className="mb-2 block text-sm">Avatar</label>
+                    <p className="text-sm text-gray-400">jpg,webp,png only</p>
                     <input
                         type="file"
                         accept="image/*"
@@ -122,15 +141,17 @@ export default function EditProfile() {
                         }}
                         className="w-80 border-b-2 border-b-[#3F3F3F] bg-transparent p-1 text-sm outline-0"
                     />
-                    {data.avatar && (
-                        <div className="mt-3">
-                            <img
-                                src={`${previewUrl.avatar}`}
-                                alt="Avatar preview"
-                                className="h-20 w-20 object-cover"
-                            />
-                        </div>
-                    )}
+                    <div className="mt-3">
+                        <img
+                            onClick={() => handleReset('avatar')}
+                            src={
+                                previewUrl.avatar ??
+                                `/storage/${auth.user.avatar}`
+                            }
+                            alt="Avatar preview"
+                            className="h-20 w-20 cursor-pointer object-cover"
+                        />
+                    </div>
                     {errors.avatar && (
                         <span className="mt-1 block text-sm text-red-700">
                             {errors.avatar}
@@ -140,6 +161,7 @@ export default function EditProfile() {
 
                 <div>
                     <label className="mb-2 block text-sm">Banner</label>
+                    <p className="text-sm text-gray-400">jpg,webp,png only</p>
                     <input
                         type="file"
                         accept="image/*"
@@ -161,15 +183,16 @@ export default function EditProfile() {
                         }}
                         className="w-80 border-b-2 border-b-[#3F3F3F] bg-transparent p-1 text-sm outline-0"
                     />
-                    {data.banner && (
-                        <div className="mt-3">
-                            <img
-                                src={`${previewUrl.banner}`}
-                                alt="Banner preview"
-                                className="h-20 w-80 object-cover"
-                            />
-                        </div>
-                    )}
+                    <div className="mt-3">
+                        <img
+                            src={
+                                previewUrl.banner ??
+                                `/storage/${auth.user.banner}`
+                            }
+                            alt="Banner preview"
+                            className="h-20 w-80 object-cover"
+                        />
+                    </div>
                     {errors.banner && (
                         <span className="mt-1 block text-sm text-red-700">
                             {errors.banner}
