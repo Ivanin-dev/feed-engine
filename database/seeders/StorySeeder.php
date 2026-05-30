@@ -9,6 +9,6 @@ class StorySeeder extends Seeder
 {
     public function run(): void
     {
-        Story::factory()->count(100)->create();
+        Story::factory()->count(5000)->create();
     }
 }

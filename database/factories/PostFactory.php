@@ -23,7 +23,7 @@ class PostFactory extends Factory
 
         return [
             'title' => $this->faker->word(),
-            'text' => $this->faker->text(),
+            'text' => $this->faker->text(1000),
             'image' => 'posts/'.$filename,
             'slug' => $this->faker->slug(),
             'created_at' => Carbon::now(),
